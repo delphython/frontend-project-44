@@ -1,38 +1,34 @@
 import { app, questionsCount } from '../index.js';
+import { getRandomNumbers } from '../helpers.js'
 
 const GAME_RULE_MESSAGE = 'What is the result of the expression?';
-const MIN_RANGE_NUMBER = 1;
-const MAX_RANGE_NUMBER = 100;
+const arithmeticActionsArray = ['+', '-', '*'];
+const pass = null;
+const expressionsArray = [];
+const correctAnswersArray = [];
 
-const getRandomInt = (min, max) => {
-  const cMin = Math.ceil(min);
-  const fMax = Math.floor(max);
-  return Math.floor(Math.random() * (fMax - cMin)) + cMin;
-};
+for (let i = 0; i < questionsCount; i += 1) {
+  let result;
 
-const getRandomNumbers = () => {
-  const randomNumbersArray = [];
+  const [firstArithmeticOperator, lastArithmeticOperator] = getRandomNumbers(2);
+  const arithmeticAction = arithmeticActionsArray[Math.floor(Math.random()*arithmeticActionsArray.length)];
 
-  for (let i = 0; i < questionsCount; i += 1) {
-    randomNumbersArray.push(getRandomInt(MIN_RANGE_NUMBER, MAX_RANGE_NUMBER));
+  switch (arithmeticAction) {
+    case '+':
+      result = firstArithmeticOperator + lastArithmeticOperator;
+      break;
+    case '-':
+      result = firstArithmeticOperator - lastArithmeticOperator;
+      break;
+    case '*':
+      result = firstArithmeticOperator * lastArithmeticOperator;
+      break;
+    default:
+      pass;
   }
 
-  return randomNumbersArray;
+  expressionsArray.push(`${firstArithmeticOperator} ${arithmeticAction} ${lastArithmeticOperator}`);
+  correctAnswersArray.push(result.toString());
 }
 
-
-const randomNumbers = getRandomNumbers();
-
-const getCorrectAnswers = (numbersArray) => {
-  const correctAnswersArray = [];
-
-  for (const number of numbersArray) {
-    correctAnswersArray.push(number % 2 === 0 ? 'yes' : 'no');
-  }
-
-  return correctAnswersArray;
-}
-
-const correctAnswers = getCorrectAnswers(randomNumbers);
-
-export default () => app(GAME_RULE_MESSAGE, randomNumbers, correctAnswers);
+export default () => app(GAME_RULE_MESSAGE, expressionsArray, correctAnswersArray);
