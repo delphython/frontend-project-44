@@ -6,21 +6,24 @@ const expressionsArray = [];
 const correctAnswersArray = [];
 
 const getGdc = (firstNumber, lastNumber) => {
-  while (firstNumber != lastNumber) {
-    if (firstNumber > lastNumber) {
-      firstNumber = firstNumber - lastNumber;
+  let a = firstNumber;
+  let b = lastNumber;
+
+  while (a !== b) {
+    if (a > b) {
+      a -= b;
     } else {
-      lastNumber = lastNumber - firstNumber;
+      b -= a;
     }
   }
 
-  return firstNumber;
-}
+  return a;
+};
 
 for (let i = 0; i < questionsCount; i += 1) {
   const [firstNumber, lastNumber] = getRandomNumbers(2);
 
-  let result = getGdc(firstNumber, lastNumber);
+  const result = getGdc(firstNumber, lastNumber);
 
   expressionsArray.push(`${firstNumber} ${lastNumber}`);
   correctAnswersArray.push(result.toString());
