@@ -1,9 +1,8 @@
 import { app, questionsCount } from '../index.js';
-import { getRandomNumbers } from '../helpers.js'
+import { getRandomNumbers } from '../helpers.js';
 
 const GAME_RULE_MESSAGE = 'What is the result of the expression?';
 const arithmeticActionsArray = ['+', '-', '*'];
-const pass = null;
 const expressionsArray = [];
 const correctAnswersArray = [];
 
@@ -11,7 +10,9 @@ for (let i = 0; i < questionsCount; i += 1) {
   let result;
 
   const [firstArithmeticOperator, lastArithmeticOperator] = getRandomNumbers(2);
-  const arithmeticAction = arithmeticActionsArray[Math.floor(Math.random()*arithmeticActionsArray.length)];
+  const arithmeticAction = arithmeticActionsArray[
+    Math.floor(Math.random() * arithmeticActionsArray.length)
+  ];
 
   switch (arithmeticAction) {
     case '+':
@@ -24,7 +25,7 @@ for (let i = 0; i < questionsCount; i += 1) {
       result = firstArithmeticOperator * lastArithmeticOperator;
       break;
     default:
-      pass;
+      result = null;
   }
 
   expressionsArray.push(`${firstArithmeticOperator} ${arithmeticAction} ${lastArithmeticOperator}`);

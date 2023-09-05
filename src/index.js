@@ -31,4 +31,4 @@ export const app = (gameRuleMessage, gameQuestions, correctAnswers) => {
   if (isWinner) {
     console.log(`Congratulations, ${gamerName}!`);
   }
-}
+};
