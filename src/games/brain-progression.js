@@ -26,11 +26,12 @@ const getProgressionArray = (firstProgressionNumber, progressionLength, progress
 };
 
 const getProgressionByString = (progressionArray, hiddenProgressionElementId) => {
-  const hiddenProgressionElement = progressionArray[hiddenProgressionElementId];
+  const pArray = progressionArray;
+  const hiddenProgressionElement = pArray[hiddenProgressionElementId];
 
-  progressionArray[hiddenProgressionElementId] = '..';
+  pArray[hiddenProgressionElementId] = '..';
 
-  const progressionByString = progressionArray.join(' ');
+  const progressionByString = pArray.join(' ');
 
   return [hiddenProgressionElement, progressionByString];
 };
@@ -43,11 +44,14 @@ for (let i = 0; i < questionsCount; i += 1) {
   const hiddenProgressionElementId = Math.floor(Math.random() * (progressionLength - 1));
 
   const progressionArray = getProgressionArray(
-    firstProgressionNumber, progressionLength, progressionStep
+    firstProgressionNumber,
+    progressionLength,
+    progressionStep,
   );
 
   const [hiddenProgressionElement, progressionByString] = getProgressionByString(
-    progressionArray, hiddenProgressionElementId
+    progressionArray,
+    hiddenProgressionElementId,
   );
 
   expressionsArray.push(progressionByString);
