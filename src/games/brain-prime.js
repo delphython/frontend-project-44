@@ -1,7 +1,7 @@
 import { app, questionsCount } from '../index.js';
 import { getRandomNumbers } from '../helpers.js';
 
-const GAME_RULE_MESSAGE = 'Answer "yes" if the number is even, otherwise answer "no".';
+const GAME_RULE_MESSAGE = 'Answer "yes" if given number is prime. Otherwise answer "no".';
 
 const randomNumbers = getRandomNumbers(questionsCount);
 
