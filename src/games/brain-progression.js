@@ -1,7 +1,7 @@
 import { app, questionsCount } from '../index.js';
 import { getRandomInt } from '../helpers.js';
 
-const GAME_RULE_MESSAGE = 'What number is missing in the progression?';
+const description = 'What number is missing in the progression?';
 const expressionsArray = [];
 const correctAnswersArray = [];
 const minProgressionLength = 5;
@@ -58,4 +58,4 @@ for (let i = 0; i < questionsCount; i += 1) {
   correctAnswersArray.push(hiddenProgressionElement.toString());
 }
 
-export default () => app(GAME_RULE_MESSAGE, expressionsArray, correctAnswersArray);
+export default () => app(description, expressionsArray, correctAnswersArray);

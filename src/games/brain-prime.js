@@ -1,7 +1,7 @@
 import { app, questionsCount } from '../index.js';
 import { getRandomNumbers } from '../helpers.js';
 
-const GAME_RULE_MESSAGE = 'Answer "yes" if given number is prime. Otherwise answer "no".';
+const description = 'Answer "yes" if given number is prime. Otherwise answer "no".';
 
 const randomNumbers = getRandomNumbers(questionsCount);
 
@@ -24,4 +24,4 @@ const getCorrectAnswers = (numbersArray) => {
 
 const correctAnswers = getCorrectAnswers(randomNumbers);
 
-export default () => app(GAME_RULE_MESSAGE, randomNumbers, correctAnswers);
+export default () => app(description, randomNumbers, correctAnswers);

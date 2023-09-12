@@ -1,7 +1,7 @@
 import { app, questionsCount } from '../index.js';
 import { getRandomNumbers } from '../helpers.js';
 
-const GAME_RULE_MESSAGE = 'Find the greatest common divisor of given numbers.';
+const description = 'Find the greatest common divisor of given numbers.';
 const expressionsArray = [];
 const correctAnswersArray = [];
 
@@ -29,4 +29,4 @@ for (let i = 0; i < questionsCount; i += 1) {
   correctAnswersArray.push(result.toString());
 }
 
-export default () => app(GAME_RULE_MESSAGE, expressionsArray, correctAnswersArray);
+export default () => app(description, expressionsArray, correctAnswersArray);
