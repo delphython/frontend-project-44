@@ -6,14 +6,7 @@ const arithmeticActionsArray = ['+', '-', '*'];
 const expressionsArray = [];
 const correctAnswersArray = [];
 
-for (let i = 0; i < questionsCount; i += 1) {
-  let result;
-
-  const [firstArithmeticOperator, lastArithmeticOperator] = getRandomNumbers(2);
-  const arithmeticAction = arithmeticActionsArray[
-    Math.floor(Math.random() * arithmeticActionsArray.length)
-  ];
-
+const getCalculationResult = (arithmeticAction, firstArithmeticOperator, lastArithmeticOperator) => {
   switch (arithmeticAction) {
     case '+':
       result = firstArithmeticOperator + lastArithmeticOperator;
@@ -27,6 +20,18 @@ for (let i = 0; i < questionsCount; i += 1) {
     default:
       result = null;
   }
+  return result;
+}
+
+for (let i = 0; i < questionsCount; i += 1) {
+  let result;
+
+  const [firstArithmeticOperator, lastArithmeticOperator] = getRandomNumbers(2);
+  const arithmeticAction = arithmeticActionsArray[
+    Math.floor(Math.random() * arithmeticActionsArray.length)
+  ];
+
+  result = getCalculationResult(arithmeticAction, firstArithmeticOperator, lastArithmeticOperator);
 
   expressionsArray.push(`${firstArithmeticOperator} ${arithmeticAction} ${lastArithmeticOperator}`);
   correctAnswersArray.push(result.toString());
