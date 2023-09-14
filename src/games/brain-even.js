@@ -4,12 +4,12 @@ import { getRandomNumbers } from '../helpers.js';
 const description = 'Answer "yes" if the number is even, otherwise answer "no".';
 const randomNumbersCount = 1;
 
-const getIsEvenAnswer = (number) => (number % 2 === 0 ? 'yes' : 'no');
+const IsEven = (number) => (number % 2 === 0);
 
 const getQuestionAndAnswer = () => {
   const [question] = getRandomNumbers(randomNumbersCount);
 
-  const answer = getIsEvenAnswer(question);
+  const answer = IsEven(question) ? 'yes' : 'no';
 
   return [question, answer.toString()];
 };
