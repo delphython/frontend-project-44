@@ -1,9 +1,8 @@
-import { app, questionsCount } from '../index.js';
+import app from '../index.js';
 import { getRandomNumbers } from '../helpers.js';
 
 const description = 'Find the greatest common divisor of given numbers.';
-const expressionsArray = [];
-const correctAnswersArray = [];
+const randomNumbersCount = 2;
 
 const getGdc = (firstNumber, lastNumber) => {
   let a = firstNumber;
@@ -20,13 +19,16 @@ const getGdc = (firstNumber, lastNumber) => {
   return a;
 };
 
-for (let i = 0; i < questionsCount; i += 1) {
-  const [firstNumber, lastNumber] = getRandomNumbers(2);
+const getQuestionAndAnswer = () => {
+  const [firstNumber, lastNumber] = getRandomNumbers(randomNumbersCount);
 
-  const result = getGdc(firstNumber, lastNumber);
+  const question = `${firstNumber} ${lastNumber}`;
 
-  expressionsArray.push(`${firstNumber} ${lastNumber}`);
-  correctAnswersArray.push(result.toString());
-}
+  const answer = getGdc(firstNumber, lastNumber);
 
-export default () => app(description, expressionsArray, correctAnswersArray);
+  return [question, answer.toString()];
+};
+
+export default () => {
+  app(description, getQuestionAndAnswer);
+};
