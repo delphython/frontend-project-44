@@ -2,27 +2,30 @@
 
 import readlineSync from 'readline-sync';
 
-export const questionsCount = 3;
-let isWinner = true;
+const questionsCount = 3;
 
-export const app = (gameRuleMessage, gameQuestions, correctAnswers) => {
+const app = (description, questionAndAnswer) => {
+  let isWinner = true;
+
   console.log('Welcome to the Brain Games!');
 
   const gamerName = readlineSync.question('May I have your name? ');
 
   console.log(`Hello, ${gamerName}!`);
 
-  console.log(gameRuleMessage);
+  console.log(description);
 
   for (let i = 0; i < questionsCount; i += 1) {
-    console.log(`Question: ${gameQuestions[i]}`);
+    const [gameQuestion, correctAnswer] = questionAndAnswer();
+
+    console.log(`Question: ${gameQuestion}`);
 
     const answer = readlineSync.question('Your answer: ');
 
-    if (answer === correctAnswers[i]) {
+    if (answer === correctAnswer) {
       console.log('Correct!');
     } else {
-      console.log(`'${answer}' is wrong answer ;(. Correct answer was '${correctAnswers[i]}'.\nLet's try again, ${gamerName}!`);
+      console.log(`'${answer}' is wrong answer ;(. Correct answer was '${correctAnswer}'.\nLet's try again, ${gamerName}!`);
       isWinner = false;
       break;
     }
@@ -32,3 +35,5 @@ export const app = (gameRuleMessage, gameQuestions, correctAnswers) => {
     console.log(`Congratulations, ${gamerName}!`);
   }
 };
+
+export default app;
