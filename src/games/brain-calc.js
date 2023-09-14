@@ -1,12 +1,17 @@
-import { app, questionsCount } from '../index.js';
+import app from '../index.js';
 import { getRandomNumbers } from '../helpers.js';
 
 const description = 'What is the result of the expression?';
 const arithmeticActionsArray = ['+', '-', '*'];
-const expressionsArray = [];
-const correctAnswersArray = [];
+const randomNumbersCount = 2;
 
-const getCalculationResult = (arithmeticAction, firstArithmeticOperator, lastArithmeticOperator) => {
+const getCalculationResult = (
+  arithmeticAction,
+  firstArithmeticOperator,
+  lastArithmeticOperator,
+) => {
+  let result;
+
   switch (arithmeticAction) {
     case '+':
       result = firstArithmeticOperator + lastArithmeticOperator;
@@ -20,21 +25,26 @@ const getCalculationResult = (arithmeticAction, firstArithmeticOperator, lastAri
     default:
       result = null;
   }
+
   return result;
-}
+};
 
-for (let i = 0; i < questionsCount; i += 1) {
-  let result;
-
-  const [firstArithmeticOperator, lastArithmeticOperator] = getRandomNumbers(2);
+const getQuestionAndAnswer = () => {
+  const [firstArithmeticOperator, lastArithmeticOperator] = getRandomNumbers(randomNumbersCount);
   const arithmeticAction = arithmeticActionsArray[
     Math.floor(Math.random() * arithmeticActionsArray.length)
   ];
 
-  result = getCalculationResult(arithmeticAction, firstArithmeticOperator, lastArithmeticOperator);
+  const question = `${firstArithmeticOperator} ${arithmeticAction} ${lastArithmeticOperator}`;
+  const answer = getCalculationResult(
+    arithmeticAction,
+    firstArithmeticOperator,
+    lastArithmeticOperator,
+  );
 
-  expressionsArray.push(`${firstArithmeticOperator} ${arithmeticAction} ${lastArithmeticOperator}`);
-  correctAnswersArray.push(result.toString());
-}
+  return [question, answer.toString()];
+};
 
-export default () => app(description, expressionsArray, correctAnswersArray);
+export default () => {
+  app(description, getQuestionAndAnswer);
+};
