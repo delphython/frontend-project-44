@@ -1,9 +1,7 @@
-import { app, questionsCount } from '../index.js';
+import app from '../index.js';
 import { getRandomInt } from '../helpers.js';
 
 const description = 'What number is missing in the progression?';
-const expressionsArray = [];
-const correctAnswersArray = [];
 const minProgressionLength = 5;
 const maxProgressionLength = 10;
 const minProgressionStep = 2;
@@ -36,7 +34,7 @@ const getProgressionByString = (progressionArray, hiddenProgressionElementId) =>
   return [hiddenProgressionElement, progressionByString];
 };
 
-for (let i = 0; i < questionsCount; i += 1) {
+const getQuestionAndAnswer = () => {
   const progressionLength = getRandomInt(minProgressionLength, maxProgressionLength);
   const progressionStep = getRandomInt(minProgressionStep, maxProgressionStep);
   const firstProgressionNumber = getRandomInt(minProgressionFirstNumber, maxProgressionFirstNumber);
@@ -49,13 +47,14 @@ for (let i = 0; i < questionsCount; i += 1) {
     progressionStep,
   );
 
-  const [hiddenProgressionElement, progressionByString] = getProgressionByString(
+  const [answer, question] = getProgressionByString(
     progressionArray,
     hiddenProgressionElementId,
   );
 
-  expressionsArray.push(progressionByString);
-  correctAnswersArray.push(hiddenProgressionElement.toString());
-}
+  return [question, answer.toString()];
+};
 
-export default () => app(description, expressionsArray, correctAnswersArray);
+export default () => {
+  app(description, getQuestionAndAnswer);
+};
