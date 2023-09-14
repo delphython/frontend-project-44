@@ -1,20 +1,19 @@
-import { app, questionsCount } from '../index.js';
+import app from '../index.js';
 import { getRandomNumbers } from '../helpers.js';
 
 const description = 'Answer "yes" if the number is even, otherwise answer "no".';
+const randomNumbersCount = 1;
 
-const randomNumbers = getRandomNumbers(questionsCount);
+const getIsEvenAnswer = (number) => (number % 2 === 0 ? 'yes' : 'no');
 
-const getCorrectAnswers = (numbersArray) => {
-  const correctAnswersArray = [];
+const getQuestionAndAnswer = () => {
+  const [question] = getRandomNumbers(randomNumbersCount);
 
-  numbersArray.forEach(
-    (number) => correctAnswersArray.push(number % 2 === 0 ? 'yes' : 'no'),
-  );
+  const answer = getIsEvenAnswer(question);
 
-  return correctAnswersArray;
+  return [question, answer.toString()];
 };
 
-const correctAnswers = getCorrectAnswers(randomNumbers);
-
-export default () => app(description, randomNumbers, correctAnswers);
+export default () => {
+  app(description, getQuestionAndAnswer);
+};
