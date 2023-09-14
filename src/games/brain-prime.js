@@ -1,9 +1,8 @@
-import { app, questionsCount } from '../index.js';
+import app from '../index.js';
 import { getRandomNumbers } from '../helpers.js';
 
 const description = 'Answer "yes" if given number is prime. Otherwise answer "no".';
-
-const randomNumbers = getRandomNumbers(questionsCount);
+const randomNumbersCount = 1;
 
 const isPrime = (number) => {
   for (let i = 2; i < number; i += 1) {
@@ -12,16 +11,14 @@ const isPrime = (number) => {
   return number !== 1;
 };
 
-const getCorrectAnswers = (numbersArray) => {
-  const correctAnswersArray = [];
+const getQuestionAndAnswer = () => {
+  const [question] = getRandomNumbers(randomNumbersCount);
 
-  numbersArray.forEach(
-    (number) => correctAnswersArray.push(isPrime(number) ? 'yes' : 'no'),
-  );
+  const answer = isPrime(question) ? 'yes' : 'no';
 
-  return correctAnswersArray;
+  return [question, answer.toString()];
 };
 
-const correctAnswers = getCorrectAnswers(randomNumbers);
-
-export default () => app(description, randomNumbers, correctAnswers);
+export default () => {
+  app(description, getQuestionAndAnswer);
+};
